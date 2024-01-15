@@ -1,4 +1,7 @@
 <template>
+    <div  class="w-1 p-10 bg-indigo-600 rounded hover:bg-indigo-300 transition" @click="showBox" />
+    <div class="block" :class="bool ? 'active' : null " >
+    </div>
     <Box>
         <template #header>Upload New Images</template>
         <form @submit.prevent="upload">
@@ -34,13 +37,13 @@
 <script setup>
 import Box from "../../../Components/UI/Box.vue";
 import {Link, useForm} from "@inertiajs/inertia-vue3";
-import {computed} from "vue";
+import {computed, ref} from "vue";
 import {Inertia} from "@inertiajs/inertia";
 import NProgress from 'nprogress'
 
 const props = defineProps({ listing: Object })
 const imageErrors = computed(() => Object.values(form.errors))
-
+const bool = ref(false)
 
 Inertia.on('progress', (event) => {
     if (event.detail.progress.percentage) {
@@ -72,8 +75,23 @@ const upload = () => {
     )
 }
 
+const showBox = () => {
+    bool.value = !bool.value
+}
+
 const reset = () => form.reset('images')
 </script>
 <style scoped>
+
+.block{
+    width: 0;
+    height: 100vh;
+    transition: .2s ease-in-out;
+    background: #1a202c;
+}
+
+.active{
+width: 50%;
+}
 
 </style>

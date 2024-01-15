@@ -1,6 +1,5 @@
 <IfModule mod_headers.c>
     Header set Access-Control-Allow-Origin "https://eass.pl"
-
 </IfModule>
 
 <IfModule mod_rewrite.c>
